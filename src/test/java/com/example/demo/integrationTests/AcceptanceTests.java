@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -36,8 +35,8 @@ public class AcceptanceTests {
     @DisplayName("https://localhost:9090/findById/{id} -> 200")
     public void shouldReturnMovieById() throws Exception {
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/findById/1")
-                .contentType("application/json")
-                .param("id", "1"))
+                        .contentType("application/json")
+                        .param("id", "1"))
                 .andDo(print())
                 .andExpect(status().isOk());
         MovieEntity expected = new MovieEntity(1L, "psy", "kryminalny");
@@ -50,15 +49,13 @@ public class AcceptanceTests {
 
     @Test
     @DisplayName("https://localhost:9090/add -> 200")
-    public void shouldAddNewRecord() throws Exception{
+    public void shouldAddNewRecord() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/add")
-                .content(asJsonString(new MovieEntity(2L, "piraci z karaibów", "przygodowy")))
-                .contentType(MediaType.APPLICATION_JSON))
+                        .content(asJsonString(new MovieEntity(2L, "piraci z karaibów", "przygodowy")))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
-
-
     }
 
     public static String asJsonString(final Object object) {

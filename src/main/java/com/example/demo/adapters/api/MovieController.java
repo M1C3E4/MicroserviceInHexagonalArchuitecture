@@ -36,9 +36,7 @@ public class MovieController {
         addMovie(movieEntity);
     }
 
-
     public MovieEntity addMovie(MovieEntity movieEntity) {
         return movieRepository.save(movieEntity);
     }
-
 }

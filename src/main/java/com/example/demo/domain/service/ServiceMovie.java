@@ -5,8 +5,6 @@ import com.example.demo.ports.MovieRepository;
 import com.example.demo.ports.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,6 +22,4 @@ public class ServiceMovie implements MovieService {
     public MovieEntity addMovie(MovieEntity movieEntity) {
         return movieRepository.save(movieEntity);
     }
-
-
 }
