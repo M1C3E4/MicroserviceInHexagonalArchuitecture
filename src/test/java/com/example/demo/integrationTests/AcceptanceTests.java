@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -48,8 +49,23 @@ public class AcceptanceTests {
     }
 
     @Test
-    @DisplayName("https://localhost:9090/allmovie -> 200")
-    public void shouldReturnAllMovie() {
-        fail();
+    @DisplayName("https://localhost:9090/add -> 200")
+    public void shouldAddNewRecord() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.post("/add")
+                .content(asJsonString(new MovieEntity(2L, "piraci z karaibów", "przygodowy")))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
+
+
+    }
+
+    public static String asJsonString(final Object object) {
+        try {
+            return new ObjectMapper().writeValueAsString(object);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

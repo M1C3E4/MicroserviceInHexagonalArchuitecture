@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface MovieService {
     Optional<MovieEntity> pullMovieById(Long id);
-    List<MovieEntity> pullAllMovies();
+    MovieEntity addMovie(MovieEntity movieEntity);
 }

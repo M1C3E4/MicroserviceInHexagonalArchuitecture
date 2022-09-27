@@ -3,12 +3,9 @@ package com.example.demo.adapters.api;
 import com.example.demo.adapters.entity.MovieEntity;
 import com.example.demo.domain.service.ServiceMovie;
 import com.example.demo.ports.MovieRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -26,6 +23,11 @@ public class MovieController {
     @GetMapping("/findById/{id}")
     public Optional<MovieEntity> movieById(@PathVariable Long id){
         return serviceMovie.pullMovieById(id);
+    }
+
+    @PostMapping("/add")
+    public MovieEntity add(@RequestBody MovieEntity movieEntity){
+        return serviceMovie.addMovie(movieEntity);
     }
 
     @EventListener(ApplicationReadyEvent.class)

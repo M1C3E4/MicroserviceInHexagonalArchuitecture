@@ -21,7 +21,9 @@ public class ServiceMovie implements MovieService {
     }
 
     @Override
-    public List<MovieEntity> pullAllMovies() {
-        return null;
+    public MovieEntity addMovie(MovieEntity movieEntity) {
+        return movieRepository.save(movieEntity);
     }
+
+
 }
